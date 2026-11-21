@@ -6,7 +6,6 @@
 <title>Corretor Inteligente PRO ULTRA</title>
 
 <style>
-/* Correção do seletor universal de reset */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -46,6 +45,7 @@ body {
         var(--bg);
     color: var(--text);
     min-height: 100vh;
+    padding-bottom: 75px;
     transition: .3s;
 }
 
@@ -66,7 +66,6 @@ button {
 }
 
 /* HEADER */
-
 .header {
     display: flex;
     align-items: center;
@@ -123,8 +122,13 @@ button {
     text-decoration: none;
 }
 
-.btn:hover {
+.btn:hover:not(:disabled) {
     transform: translateY(-2px);
+}
+
+.btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
 }
 
 .btn-primary {
@@ -140,15 +144,9 @@ button {
 }
 
 @keyframes pulseGlow {
-    0% {
-        box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.5);
-    }
-    70% {
-        box-shadow: 0 0 0 10px rgba(99, 102, 241, 0);
-    }
-    100% {
-        box-shadow: 0 0 0 0 rgba(99, 102, 241, 0);
-    }
+    0% { box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.5); }
+    70% { box-shadow: 0 0 0 10px rgba(99, 102, 241, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(99, 102, 241, 0); }
 }
 
 .btn-success {
@@ -243,7 +241,6 @@ button {
 }
 
 /* TOOLBAR */
-
 .toolbar {
     background: var(--card);
     border: 1px solid var(--border);
@@ -285,7 +282,6 @@ textarea:focus {
 }
 
 /* MAIN */
-
 .main-grid {
     display: grid;
     grid-template-columns: minmax(0, 1fr) 360px;
@@ -325,17 +321,9 @@ textarea:focus {
     color: var(--muted);
 }
 
-.status.loading {
-    color: var(--primary);
-}
-
-.status.success {
-    color: var(--success);
-}
-
-.status.error {
-    color: var(--danger);
-}
+.status.loading { color: var(--primary); }
+.status.success { color: var(--success); }
+.status.error { color: var(--danger); }
 
 .editor-wrap {
     position: relative;
@@ -371,7 +359,6 @@ textarea:focus {
 }
 
 /* SIDEBAR */
-
 .sidebar {
     display: flex;
     flex-direction: column;
@@ -426,13 +413,86 @@ textarea:focus {
     font-size: 12px;
 }
 
-/* CORRECTIONS */
+/* NATIVE ADVANCED AD SLOT (NOTA) */
+.ad-native-card {
+    background: var(--card2);
+    border: 1px dashed var(--primary);
+    border-radius: 16px;
+    padding: 14px;
+    position: relative;
+}
 
+.ad-tag {
+    display: inline-block;
+    background: rgba(245, 158, 11, 0.15);
+    color: var(--warning);
+    border: 1px solid rgba(245, 158, 11, 0.3);
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 6px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+
+.ad-native-content h4 {
+    font-size: 14px;
+    margin-bottom: 4px;
+}
+
+.ad-native-content p {
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 10px;
+}
+
+.ad-native-cta {
+    width: 100%;
+    padding: 8px;
+    border-radius: 10px;
+    border: none;
+    background: var(--primary);
+    color: white;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+/* FIXED BOTTOM ADMOB BANNER */
+.admob-banner-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background: var(--card);
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 950;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.admob-banner-inner {
+    width: min(728px, 96%);
+    height: 50px;
+    background: var(--card2);
+    border: 1px dashed var(--border);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 12px;
+    font-size: 12px;
+    color: var(--muted);
+}
+
+/* CORRECTIONS */
 .corrections-list {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    max-height: 550px;
+    max-height: 450px;
     overflow: auto;
 }
 
@@ -477,7 +537,6 @@ textarea:focus {
 }
 
 /* PREVIEW */
-
 .preview-card {
     margin-top: 18px;
     padding: 18px;
@@ -498,7 +557,6 @@ textarea:focus {
 }
 
 /* HISTORY */
-
 .modal {
     position: fixed;
     inset: 0;
@@ -560,11 +618,10 @@ textarea:focus {
 }
 
 /* TOAST */
-
 .toast {
     position: fixed;
     right: 20px;
-    bottom: 20px;
+    bottom: 75px;
     background: #111827;
     color: white;
     padding: 13px 17px;
@@ -581,15 +638,11 @@ textarea:focus {
     opacity: 1;
 }
 
-/* EMPTY */
-
 .empty {
     padding: 25px 10px;
     text-align: center;
     color: var(--muted);
 }
-
-/* LOADER */
 
 .loader {
     width: 16px;
@@ -604,57 +657,23 @@ textarea:focus {
 }
 
 @keyframes spin {
-    to {
-        transform: rotate(360deg);
-    }
+    to { transform: rotate(360deg); }
 }
 
-/* RESPONSIVE */
-
 @media (max-width: 1000px) {
-    .main-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .sidebar {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-    }
+    .main-grid { grid-template-columns: 1fr; }
+    .sidebar { display: grid; grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (max-width: 650px) {
-    .app {
-        padding: 10px;
-    }
-
-    .sidebar {
-        display: flex;
-    }
-
-    #editor {
-        min-height: 350px;
-        font-size: 16px;
-    }
-
-    .header {
-        align-items: flex-start;
-    }
-
-    .toolbar {
-        align-items: stretch;
-    }
-
-    .toolbar-group {
-        width: 100%;
-    }
-
-    .toolbar-group select {
-        flex: 1;
-    }
-
-    .btn {
-        padding: 9px 11px;
-    }
+    .app { padding: 10px; }
+    .sidebar { display: flex; }
+    #editor { min-height: 350px; font-size: 16px; }
+    .header { align-items: flex-start; }
+    .toolbar { align-items: stretch; }
+    .toolbar-group { width: 100%; }
+    .toolbar-group select { flex: 1; }
+    .btn { padding: 9px 11px; }
 }
 </style>
 </head>
@@ -679,10 +698,8 @@ textarea:focus {
 
     <!-- HEADER -->
     <header class="header">
-
         <div class="brand">
             <div class="logo">✍️</div>
-
             <div>
                 <h1>Corretor Inteligente <span style="color:#8b5cf6">PRO ULTRA</span></h1>
                 <p>Correção gramatical, ortográfica e análise inteligente</p>
@@ -696,15 +713,12 @@ textarea:focus {
             <button class="btn" id="themeBtn">🌙 Tema</button>
             <button class="btn" id="historyBtn">🕘 Histórico</button>
         </div>
-
     </header>
 
     <!-- TOOLBAR -->
     <section class="toolbar">
-
         <div class="toolbar-group">
             <label>Idioma</label>
-
             <select id="language">
                 <option value="pt-BR">Português Brasil</option>
                 <option value="pt-PT">Português Portugal</option>
@@ -718,7 +732,6 @@ textarea:focus {
 
         <div class="toolbar-group">
             <label>Tamanho</label>
-
             <select id="fontSize">
                 <option value="14">14px</option>
                 <option value="16">16px</option>
@@ -729,60 +742,24 @@ textarea:focus {
             </select>
         </div>
 
-        <button class="btn btn-primary" id="analyzeBtn">
-            🔎 Analisar texto
-        </button>
+        <button class="btn btn-primary" id="analyzeBtn">🔎 Analisar texto</button>
+        <button class="btn btn-success" id="applyAllBtn">✨ Corrigir tudo</button>
+        <button class="btn" id="copyBtn">📋 Copiar</button>
+        <button class="btn" id="downloadBtn">💾 Baixar</button>
+        <button class="btn" id="speakBtn">🔊 Ouvir</button>
+        <button class="btn" id="importBtn">📂 Importar</button>
+        <button class="btn btn-danger" id="clearBtn">🗑️ Limpar</button>
 
-        <button class="btn btn-success" id="applyAllBtn">
-            ✨ Corrigir tudo
-        </button>
-
-        <button class="btn" id="copyBtn">
-            📋 Copiar
-        </button>
-
-        <button class="btn" id="downloadBtn">
-            💾 Baixar
-        </button>
-
-        <button class="btn" id="speakBtn">
-            🔊 Ouvir
-        </button>
-
-        <button class="btn" id="importBtn">
-            📂 Importar
-        </button>
-
-        <button class="btn btn-danger" id="clearBtn">
-            🗑️ Limpar
-        </button>
-
-        <input
-            type="file"
-            id="fileInput"
-            accept=".txt,.md,text/plain"
-            hidden
-        >
-
+        <input type="file" id="fileInput" accept=".txt,.md,text/plain" hidden>
     </section>
 
     <!-- MAIN -->
     <main class="main-grid">
-
         <section>
-
             <div class="editor-card">
-
                 <div class="editor-header">
-
-                    <div class="editor-title">
-                        📝 Editor de texto
-                    </div>
-
-                    <div class="status" id="status">
-                        Pronto para analisar
-                    </div>
-
+                    <div class="editor-title">📝 Editor de texto</div>
+                    <div class="status" id="status">Pronto para analisar</div>
                 </div>
 
                 <div class="editor-wrap">
@@ -795,136 +772,177 @@ textarea:focus {
                 </div>
 
                 <div class="editor-footer">
-
                     <div class="word-count">
                         <span id="charCount">0 caracteres</span>
                         <span id="wordCount">0 palavras</span>
                         <span id="sentenceCount">0 frases</span>
                     </div>
-
                     <span>Máximo: 60.000 caracteres</span>
-
                 </div>
-
             </div>
 
             <!-- PREVIEW -->
             <div class="preview-card">
-
                 <div class="side-title">
                     <h3>🔍 Visualização da análise</h3>
-
-                    <span class="badge" id="previewBadge">
-                        0 erros
-                    </span>
+                    <span class="badge" id="previewBadge">0 erros</span>
                 </div>
-
                 <div class="preview" id="preview">
                     Digite um texto e clique em "Analisar texto".
                 </div>
-
             </div>
-
         </section>
 
         <!-- SIDEBAR -->
         <aside class="sidebar">
-
             <div class="side-card">
-
                 <div class="side-title">
                     <h3>📊 Estatísticas</h3>
                 </div>
-
                 <div class="stat-grid">
-
                     <div class="stat">
                         <strong id="statWords">0</strong>
                         <span>Palavras</span>
                     </div>
-
                     <div class="stat">
                         <strong id="statChars">0</strong>
                         <span>Caracteres</span>
                     </div>
-
                     <div class="stat">
                         <strong id="statSentences">0</strong>
                         <span>Frases</span>
                     </div>
-
                     <div class="stat">
                         <strong id="statErrors">0</strong>
                         <span>Correções</span>
                     </div>
-
                 </div>
+            </div>
 
+            <!-- BLOCO NATIVO AVANÇADO (ADMOB NATIVE / NOTA) -->
+            <div class="side-card">
+                <div class="ad-native-card" id="admob-native-slot">
+                    <span class="ad-tag">Anúncio de Teste • Nativo</span>
+                    <div class="ad-native-content">
+                        <h4 id="nativeAdTitle">Corretor_PRO_ULTRA_Nativo_Editor</h4>
+                        <p id="nativeAdBody">Slot conectado ao ID de teste Android: ca-app-pub-3940256099942544/2247696110</p>
+                        <button class="ad-native-cta" id="nativeAdCta" onclick="AdMobBridge.triggerNativeClick()">Saiba Mais</button>
+                    </div>
+                </div>
             </div>
 
             <div class="side-card">
-
                 <div class="side-title">
-
                     <h3>⚠️ Correções</h3>
-
-                    <span class="badge" id="errorBadge">
-                        0
-                    </span>
-
+                    <span class="badge" id="errorBadge">0</span>
                 </div>
-
                 <div class="corrections-list" id="correctionsList">
-
-                    <div class="empty">
-                        Nenhuma correção encontrada.
-                    </div>
-
+                    <div class="empty">Nenhuma correção encontrada.</div>
                 </div>
-
             </div>
-
         </aside>
-
     </main>
 
 </div>
 
-<!-- HISTORY MODAL -->
-
-<div class="modal" id="historyModal">
-
-    <div class="modal-box">
-
-        <div class="modal-header">
-
-            <div>
-                <strong>🕘 Histórico de análises</strong>
-            </div>
-
-            <button class="btn" id="closeHistory">
-                ✕ Fechar
-            </button>
-
-        </div>
-
-        <div id="historyList"></div>
-
+<!-- BANNER FIXO ADMOB -->
+<div class="admob-banner-bar" id="admob-banner-slot">
+    <div class="admob-banner-inner">
+        <span><strong style="color:var(--primary)">AdMob Banner (Teste)</strong> • ca-app-pub-3940256099942544/6300978111</span>
+        <span class="badge">320x50</span>
     </div>
+</div>
 
+<!-- HISTORY MODAL -->
+<div class="modal" id="historyModal">
+    <div class="modal-box">
+        <div class="modal-header">
+            <div><strong>🕘 Histórico de análises</strong></div>
+            <button class="btn" id="closeHistory">✕ Fechar</button>
+        </div>
+        <div id="historyList"></div>
+    </div>
 </div>
 
 <!-- TOAST -->
-
 <div class="toast" id="toast"></div>
 
 <script>
 "use strict";
 
 /* =========================================================
-    CONFIGURAÇÃO
+    CONFIGURAÇÃO ADMOB SDK (IDS DE TESTE OFICIAIS ANDROID)
 ========================================================= */
+const ADMOB_CONFIG = {
+    testMode: true,
+    appId: "ca-app-pub-3940256099942544~3347511330",
+    units: {
+        banner: "ca-app-pub-3940256099942544/6300978111",
+        interstitial: "ca-app-pub-3940256099942544/1033173712",
+        rewarded: "ca-app-pub-3940256099942544/5224354917",
+        nativeAdvanced: "ca-app-pub-3940256099942544/2247696110"
+    },
+    interstitialCooldownMs: 60000
+};
 
+const AdMobBridge = {
+    lastInterstitialTime: 0,
+
+    init() {
+        if (window.AndroidAdMob && typeof window.AndroidAdMob.initAdMob === "function") {
+            window.AndroidAdMob.initAdMob(JSON.stringify(ADMOB_CONFIG));
+        }
+        this.showBanner();
+        this.loadNativeAd();
+    },
+
+    showBanner() {
+        if (window.AndroidAdMob && typeof window.AndroidAdMob.showBanner === "function") {
+            window.AndroidAdMob.showBanner(ADMOB_CONFIG.units.banner);
+        }
+    },
+
+    loadNativeAd() {
+        if (window.AndroidAdMob && typeof window.AndroidAdMob.loadNativeAd === "function") {
+            window.AndroidAdMob.loadNativeAd(ADMOB_CONFIG.units.nativeAdvanced);
+        }
+    },
+
+    onNativeAdLoaded(title, body, ctaText) {
+        const titleEl = document.getElementById("nativeAdTitle");
+        const bodyEl = document.getElementById("nativeAdBody");
+        const ctaEl = document.getElementById("nativeAdCta");
+        if (titleEl && title) titleEl.textContent = title;
+        if (bodyEl && body) bodyEl.textContent = body;
+        if (ctaEl && ctaText) ctaEl.textContent = ctaText;
+    },
+
+    triggerNativeClick() {
+        if (window.AndroidAdMob && typeof window.AndroidAdMob.onNativeClick === "function") {
+            window.AndroidAdMob.onNativeClick();
+        } else {
+            showToast("Simulação Web: Clique no Anúncio Nativo de Teste registrado.");
+        }
+    },
+
+    showInterstitial(reason = "") {
+        const now = Date.now();
+        if (now - this.lastInterstitialTime < ADMOB_CONFIG.interstitialCooldownMs) {
+            return;
+        }
+        this.lastInterstitialTime = now;
+
+        if (window.AndroidAdMob && typeof window.AndroidAdMob.showInterstitial === "function") {
+            window.AndroidAdMob.showInterstitial(ADMOB_CONFIG.units.interstitial);
+        } else {
+            console.log(`[AdMob Teste] Intersticial disparado (${reason}): ${ADMOB_CONFIG.units.interstitial}`);
+        }
+    }
+};
+
+/* =========================================================
+    CONFIGURAÇÃO DO CORRETOR
+========================================================= */
 const API_URL = "https://api.languagetool.org/v2/check";
 
 const STORAGE_TEXT = "corretor-pro-ultra-text";
@@ -937,155 +955,87 @@ const MAX_TEXT_LENGTH = 60000;
 const MAX_HISTORY = 20;
 const MAX_UNDO = 30;
 
-
-/* =========================================================
-    ESTADO
-========================================================= */
-
 let text = "";
 let corrections = [];
 let history = [];
-
 let undoStack = [];
 let redoStack = [];
-
 let isLoading = false;
 let isSpeaking = false;
-
 let analysisController = null;
 
-let selectedCorrection = null;
-
-
-/* =========================================================
-    ELEMENTOS
-========================================================= */
-
 const editor = document.getElementById("editor");
-
 const language = document.getElementById("language");
 const fontSize = document.getElementById("fontSize");
-
 const status = document.getElementById("status");
-
 const analyzeBtn = document.getElementById("analyzeBtn");
 const applyAllBtn = document.getElementById("applyAllBtn");
-
 const copyBtn = document.getElementById("copyBtn");
 const downloadBtn = document.getElementById("downloadBtn");
 const speakBtn = document.getElementById("speakBtn");
-
 const importBtn = document.getElementById("importBtn");
 const fileInput = document.getElementById("fileInput");
-
 const clearBtn = document.getElementById("clearBtn");
-
 const undoBtn = document.getElementById("undoBtn");
 const redoBtn = document.getElementById("redoBtn");
-
 const themeBtn = document.getElementById("themeBtn");
-
 const historyBtn = document.getElementById("historyBtn");
 const historyModal = document.getElementById("historyModal");
 const closeHistory = document.getElementById("closeHistory");
 const historyList = document.getElementById("historyList");
-
 const correctionsList = document.getElementById("correctionsList");
-
 const preview = document.getElementById("preview");
 const previewBadge = document.getElementById("previewBadge");
-
 const charCount = document.getElementById("charCount");
 const wordCount = document.getElementById("wordCount");
 const sentenceCount = document.getElementById("sentenceCount");
-
 const statWords = document.getElementById("statWords");
 const statChars = document.getElementById("statChars");
 const statSentences = document.getElementById("statSentences");
 const statErrors = document.getElementById("statErrors");
-
 const errorBadge = document.getElementById("errorBadge");
-
 const toast = document.getElementById("toast");
 
-
-/* =========================================================
-    UTILITÁRIOS
-========================================================= */
-
 function showToast(message) {
-
     toast.textContent = message;
     toast.classList.add("show");
-
     clearTimeout(showToast.timer);
-
     showToast.timer = setTimeout(() => {
         toast.classList.remove("show");
     }, 2500);
 }
 
-
 function setStatus(message, type = "") {
-
     status.className = "status";
-
-    if (type) {
-        status.classList.add(type);
-    }
-
+    if (type) status.classList.add(type);
     status.innerHTML = message;
 }
 
-
 function countWords(value) {
-
-    if (!value.trim()) {
-        return 0;
-    }
-
+    if (!value.trim()) return 0;
     return value.trim().split(/\s+/).length;
 }
 
-
 function countSentences(value) {
-
-    if (!value.trim()) {
-        return 0;
-    }
-
+    if (!value.trim()) return 0;
     const matches = value.match(/[.!?]+(?=\s|$)/g);
-
     return matches ? matches.length : 1;
 }
 
-
-/* =========================================================
-    ATUALIZAÇÃO DO EDITOR
-========================================================= */
-
 function updateText(newText, saveUndo = false) {
-
     if (newText.length > MAX_TEXT_LENGTH) {
         showToast("O texto ultrapassa o limite de 60.000 caracteres.");
         return;
     }
 
     if (saveUndo && text !== newText) {
-
         undoStack.push(text);
-
-        if (undoStack.length > MAX_UNDO) {
-            undoStack.shift();
-        }
-
+        if (undoStack.length > MAX_UNDO) undoStack.shift();
         redoStack = [];
     }
 
     text = newText;
-
     editor.value = text;
-
     corrections = [];
 
     updateStatistics();
@@ -1101,56 +1051,92 @@ function updateUndoButtons() {
     if (redoBtn) redoBtn.disabled = redoStack.length === 0;
 }
 
-
-/* =========================================================
-    ESTATÍSTICAS
-========================================================= */
-
 function updateStatistics() {
-
     const chars = text.length;
     const words = countWords(text);
     const sentences = countSentences(text);
 
-    charCount.textContent =
-        `${chars.toLocaleString("pt-BR")} caracteres`;
+    charCount.textContent = `${chars.toLocaleString("pt-BR")} caracteres`;
+    wordCount.textContent = `${words.toLocaleString("pt-BR")} palavras`;
+    sentenceCount.textContent = `${sentences.toLocaleString("pt-BR")} frases`;
 
-    wordCount.textContent =
-        `${words.toLocaleString("pt-BR")} palavras`;
+    statChars.textContent = chars.toLocaleString("pt-BR");
+    statWords.textContent = words.toLocaleString("pt-BR");
+    statSentences.textContent = sentences.toLocaleString("pt-BR");
+    statErrors.textContent = corrections.length;
 
-    sentenceCount.textContent =
-        `${sentences.toLocaleString("pt-BR")} frases`;
-
-    statChars.textContent =
-        chars.toLocaleString("pt-BR");
-
-    statWords.textContent =
-        words.toLocaleString("pt-BR");
-
-    statSentences.textContent =
-        sentences.toLocaleString("pt-BR");
-
-    statErrors.textContent =
-        corrections.length;
-
-    errorBadge.textContent =
-        corrections.length;
-
-    previewBadge.textContent =
-        `${corrections.length} ${
-            corrections.length === 1 ? "erro" : "erros"
-        }`;
+    errorBadge.textContent = corrections.length;
+    previewBadge.textContent = `${corrections.length} ${corrections.length === 1 ? "erro" : "erros"}`;
 }
 
+/* =========================================================
+    CHECAGEM LOCAL OFFLINE (FALLBACK)
+========================================================= */
+function runLocalFallbackCheck(content) {
+    const localMatches = [];
+
+    const addMatch = (offset, length, message, suggestions) => {
+        if (offset < 0 || length <= 0 || offset + length > content.length) return;
+        localMatches.push({
+            offset,
+            length,
+            message: `[Offline] ${message}`,
+            replacements: suggestions.map(value => ({ value })),
+            rule: { id: "LOCAL_FALLBACK" }
+        });
+    };
+
+    const doubleSpaceRegex = /[^\S\r\n]{2,}/g;
+    for (const match of content.matchAll(doubleSpaceRegex)) {
+        const offset = match.index ?? 0;
+        if (offset > 0 && offset + match[0].length < content.length) {
+            addMatch(offset, match[0].length, "Espaço duplicado encontrado.", [" "]);
+        }
+    }
+
+    const spaceBeforePunctRegex = /[^\S\r\n]+([,.;:!?])/g;
+    for (const match of content.matchAll(spaceBeforePunctRegex)) {
+        const offset = match.index ?? 0;
+        addMatch(offset, match[0].length, "Espaço desnecessário antes da pontuação.", [match[1]]);
+    }
+
+    const repeatedPunctRegex = /([!?,;:])\1+|\.{2,}/g;
+    for (const match of content.matchAll(repeatedPunctRegex)) {
+        const token = match[0];
+        const offset = match.index ?? 0;
+        if (token.startsWith(".")) {
+            if (token.length !== 3) {
+                addMatch(offset, token.length, "Uso irregular de pontos.", ["..."]);
+            }
+        } else {
+            addMatch(offset, token.length, "Pontuação repetida.", [token[0]]);
+        }
+    }
+
+    const repeatedWordRegex = /\b([\p{L}\p{N}_-]+)\s+\1\b/giu;
+    for (const match of content.matchAll(repeatedWordRegex)) {
+        const fullMatch = match[0];
+        const word = match[1];
+        const offset = match.index ?? 0;
+        addMatch(offset, fullMatch.length, "Palavra repetida em sequência.", [word]);
+    }
+
+    return localMatches.sort((a, b) => a.offset - b.offset);
+}
 
 /* =========================================================
-    LANGUAGE TOOL
+    LANGUAGE TOOL COM TIMEOUT + RESILIÊNCIA OFFLINE
 ========================================================= */
-
 async function requestAnalysis(content) {
-
     if (!content.trim()) {
-        return [];
+        return { matches: [], source: "none" };
+    }
+
+    if (!navigator.onLine) {
+        return {
+            matches: runLocalFallbackCheck(content),
+            source: "offline"
+        };
     }
 
     if (analysisController) {
@@ -1158,406 +1144,289 @@ async function requestAnalysis(content) {
     }
 
     analysisController = new AbortController();
+    const timeoutId = setTimeout(() => {
+        analysisController.abort("timeout");
+    }, 6000);
 
-    const params = new URLSearchParams();
+    try {
+        const params = new URLSearchParams();
+        params.append("text", content);
+        params.append("language", language.value);
+        params.append("enabledOnly", "false");
 
-    params.append("text", content);
-    params.append("language", language.value);
-    params.append("enabledOnly", "false");
+        const response = await fetch(API_URL, {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: params.toString(),
+            signal: analysisController.signal
+        });
 
-    const response = await fetch(API_URL, {
+        if (!response.ok) {
+            throw new Error(`Erro HTTP ${response.status}`);
+        }
 
-        method: "POST",
+        const data = await response.json();
+        return {
+            matches: Array.isArray(data.matches) ? data.matches : [],
+            source: "online"
+        };
+    } catch (error) {
+        if (error?.name === "AbortError" && analysisController?.signal?.reason !== "timeout") {
+            return { matches: [], source: "aborted" };
+        }
 
-        headers: {
-            "Content-Type":
-                "application/x-www-form-urlencoded"
-        },
-
-        body: params.toString(),
-
-        signal: analysisController.signal
-
-    });
-
-    if (!response.ok) {
-
-        throw new Error(
-            `Erro HTTP ${response.status}`
-        );
+        console.warn("LanguageTool indisponível, ativando checagem local:", error);
+        return {
+            matches: runLocalFallbackCheck(content),
+            source: "fallback"
+        };
+    } finally {
+        clearTimeout(timeoutId);
     }
-
-    const data = await response.json();
-
-    return Array.isArray(data.matches)
-        ? data.matches
-        : [];
 }
 
-
-/* =========================================================
-    ANALISAR TEXTO
-========================================================= */
-
 async function analyzeText(saveHistory = true) {
-
     if (!text.trim()) {
-
         showToast("Digite algum texto primeiro.");
-
         editor.focus();
-
         return;
     }
 
     if (text.length > MAX_TEXT_LENGTH) {
-
-        showToast(
-            "O texto ultrapassa o limite permitido."
-        );
-
+        showToast("O texto ultrapassa o limite permitido.");
         return;
     }
 
     isLoading = true;
-
     analyzeBtn.disabled = true;
-
-    analyzeBtn.innerHTML =
-        '<span class="loader"></span>Analisando...';
-
-    setStatus(
-        '<span class="loader"></span>Analisando texto...',
-        "loading"
-    );
+    analyzeBtn.innerHTML = '<span class="loader"></span>Analisando...';
+    setStatus('<span class="loader"></span>Analisando texto...', "loading");
 
     try {
+        const { matches, source } = await requestAnalysis(text);
+        if (source === "aborted") return;
 
-        const result =
-            await requestAnalysis(text);
-
-        corrections = result;
+        corrections = matches;
 
         updateStatistics();
-
         renderCorrections();
-
         renderPreview();
 
         if (saveHistory) {
             saveHistoryItem();
+            AdMobBridge.showInterstitial("analise_concluida");
         }
+
+        const modeLabel = source === "online" ? "" : " (Modo offline)";
 
         if (corrections.length === 0) {
-
-            setStatus(
-                "✓ Nenhum erro encontrado",
-                "success"
-            );
-
-            showToast(
-                "Texto analisado sem correções."
-            );
-
+            setStatus(`✓ Nenhum erro encontrado${modeLabel}`, "success");
+            showToast(source === "online" ? "Texto analisado sem correções." : "Checagem local concluída sem problemas.");
         } else {
-
-            setStatus(
-                `⚠ ${corrections.length} correção(ões) encontrada(s)`,
-                "error"
-            );
-
-            showToast(
-                `${corrections.length} correção(ões) encontrada(s).`
-            );
+            setStatus(`⚠ ${corrections.length} correção(ões) encontrada(s)${modeLabel}`, "error");
+            showToast(`${corrections.length} correção(ões) encontrada(s)${modeLabel}.`);
         }
-
     } catch (error) {
-
-        if (error.name === "AbortError") {
-            return;
-        }
-
         console.error(error);
-
-        setStatus(
-            "Erro ao conectar ao LanguageTool",
-            "error"
-        );
-
-        showToast(
-            "Não foi possível analisar o texto."
-        );
-
+        setStatus("Erro na análise do texto", "error");
+        showToast("Não foi possível analisar o texto.");
     } finally {
-
         isLoading = false;
-
         analyzeBtn.disabled = false;
-
-        analyzeBtn.innerHTML =
-            "🔎 Analisar texto";
+        analyzeBtn.innerHTML = "🔎 Analisar texto";
     }
 }
 
-
-/* =========================================================
-    CONTEXTO DA CORREÇÃO
-========================================================= */
-
 function getCorrectionContext(correction) {
-
-    const start = Math.max(
-        0,
-        correction.offset - 35
-    );
-
-    const end = Math.min(
-        text.length,
-        correction.offset +
-        correction.length +
-        35
-    );
-
-    let context =
-        text.substring(start, end);
-
-    context =
-        context.replace(/\n/g, " ");
-
-    return context;
+    const start = Math.max(0, correction.offset - 35);
+    const end = Math.min(text.length, correction.offset + correction.length + 35);
+    return text.substring(start, end).replace(/\n/g, " ");
 }
 
-
-/* =========================================================
-    RENDERIZA CORREÇÕES
-========================================================= */
-
 function renderCorrections() {
-
     correctionsList.innerHTML = "";
-
     updateStatistics();
 
     if (!corrections.length) {
-
-        correctionsList.innerHTML = `
-            <div class="empty">
-                ✓ Nenhuma correção encontrada.
-            </div>
-        `;
-
+        correctionsList.innerHTML = `<div class="empty">✓ Nenhuma correção encontrada.</div>`;
         return;
     }
 
     corrections.forEach((correction, index) => {
-
-        const box =
-            document.createElement("div");
-
+        const box = document.createElement("div");
         box.className = "correction";
 
-        const message =
-            document.createElement("div");
+        const message = document.createElement("div");
+        message.className = "correction-message";
+        message.textContent = correction.message || "Possível problema encontrado.";
 
-        message.className =
-            "correction-message";
+        const context = document.createElement("div");
+        context.className = "correction-context";
+        context.textContent = `"${getCorrectionContext(correction)}"`;
 
-        message.textContent =
-            correction.message ||
-            "Possível problema encontrado.";
+        const suggestions = document.createElement("div");
+        suggestions.className = "suggestion-list";
 
-        const context =
-            document.createElement("div");
-
-        context.className =
-            "correction-context";
-
-        context.textContent =
-            `"${getCorrectionContext(correction)}"`;
-
-        const suggestions =
-            document.createElement("div");
-
-        suggestions.className =
-            "suggestion-list";
-
-        const replacementList =
-            correction.replacements || [];
+        const replacementList = correction.replacements || [];
 
         if (!replacementList.length) {
-
-            const noSuggestion =
-                document.createElement("span");
-
+            const noSuggestion = document.createElement("span");
             noSuggestion.className = "badge";
-
-            noSuggestion.textContent =
-                "Sem sugestão automática";
-
-            suggestions.appendChild(
-                noSuggestion
-            );
-
+            noSuggestion.textContent = "Sem sugestão automática";
+            suggestions.appendChild(noSuggestion);
         } else {
-
-            replacementList
-                .slice(0, 6)
-                .forEach(replacement => {
-
-                    const button =
-                        document.createElement("button");
-
-                    button.className =
-                        "suggestion";
-
-                    button.textContent =
-                        replacement.value;
-
-                    button.title =
-                        "Aplicar esta sugestão";
-
-                    button.addEventListener(
-                        "click",
-                        () => {
-
-                            applySuggestion(
-                                index,
-                                replacement.value
-                            );
-                        }
-                    );
-
-                    suggestions.appendChild(button);
-                });
+            replacementList.slice(0, 6).forEach(replacement => {
+                const button = document.createElement("button");
+                button.className = "suggestion";
+                button.textContent = replacement.value;
+                button.title = "Aplicar esta sugestão";
+                button.addEventListener("click", () => applySuggestion(index, replacement.value));
+                suggestions.appendChild(button);
+            });
         }
 
         box.appendChild(message);
         box.appendChild(context);
         box.appendChild(suggestions);
-
         correctionsList.appendChild(box);
     });
 }
 
-
 /* =========================================================
-    APLICA SUGESTÃO
+    AJUSTE DE OFFSETS EM CORREÇÕES ENCADEADAS
 ========================================================= */
+function shiftCorrectionsAfterEdit(editedOffset, editedLength, replacement) {
+    const editedEnd = editedOffset + editedLength;
+    const delta = replacement.length - editedLength;
 
-async function applySuggestion(
-    index,
-    replacement
-) {
+    corrections = corrections
+        .filter(item => {
+            if (!Number.isInteger(item.offset) || !Number.isInteger(item.length)) {
+                return false;
+            }
+            const itemStart = item.offset;
+            const itemEnd = item.offset + item.length;
 
-    const correction =
-        corrections[index];
+            const overlapsEditedRange =
+                (itemStart >= editedOffset && itemStart < editedEnd) ||
+                (itemEnd > editedOffset && itemEnd <= editedEnd) ||
+                (itemStart <= editedOffset && itemEnd >= editedEnd);
 
-    if (!correction) {
+            return !overlapsEditedRange;
+        })
+        .map(item => {
+            if (item.offset >= editedEnd) {
+                return {
+                    ...item,
+                    offset: item.offset + delta
+                };
+            }
+            return item;
+        });
+}
+
+async function applySuggestion(index, replacement) {
+    const correction = corrections[index];
+    if (!correction) return;
+
+    const start = correction.offset;
+    const end = correction.offset + correction.length;
+    const newText = text.substring(0, start) + replacement + text.substring(end);
+
+    if (newText.length > MAX_TEXT_LENGTH) {
+        showToast("O texto ultrapassa o limite de 60.000 caracteres.");
         return;
     }
 
-    const start =
-        correction.offset;
+    if (text !== newText) {
+        undoStack.push(text);
+        if (undoStack.length > MAX_UNDO) undoStack.shift();
+        redoStack = [];
+    }
 
-    const end =
-        correction.offset +
-        correction.length;
+    text = newText;
+    editor.value = text;
+    localStorage.setItem(STORAGE_TEXT, text);
 
-    const newText =
-        text.substring(0, start) +
-        replacement +
-        text.substring(end);
+    shiftCorrectionsAfterEdit(start, correction.length, replacement);
 
-    updateText(newText, true);
+    updateStatistics();
+    renderCorrections();
+    renderPreview();
+    updateUndoButtons();
 
-    setStatus(
-        "Sugestão aplicada. Reanalisando...",
-        "loading"
-    );
-
+    setStatus("Sugestão aplicada. Reanalisando...", "loading");
     await analyzeText(false);
 }
 
-
-/* =========================================================
-    CORRIGIR TUDO
-========================================================= */
-
 async function applyAllCorrections() {
-
     if (!corrections.length) {
-
-        showToast(
-            "Não existem correções para aplicar."
-        );
-
+        showToast("Não existem correções para aplicar.");
         return;
     }
 
-    const validCorrections =
-        corrections
-            .filter(item =>
-                Array.isArray(item.replacements) &&
-                item.replacements.length > 0
-            )
-            .sort(
-                (a, b) =>
-                    b.offset - a.offset
-            );
+    const validCorrections = [...corrections]
+        .filter(item =>
+            Array.isArray(item.replacements) &&
+            item.replacements.length > 0 &&
+            Number.isInteger(item.offset) &&
+            Number.isInteger(item.length)
+        )
+        .sort((a, b) => b.offset - a.offset);
 
     if (!validCorrections.length) {
-
-        showToast(
-            "Nenhuma correção automática disponível."
-        );
-
+        showToast("Nenhuma correção automática disponível.");
         return;
     }
 
     let newText = text;
-    let lastStart = Infinity;
+    let appliedAny = false;
+    let nextAllowedEnd = Infinity;
 
     for (const correction of validCorrections) {
+        const start = correction.offset;
+        const end = correction.offset + correction.length;
 
-        const start =
-            correction.offset;
-
-        const end =
-            correction.offset +
-            correction.length;
-
-        if (end > lastStart) {
+        if (end > nextAllowedEnd || start < 0 || end > newText.length) {
             continue;
         }
 
-        const replacement =
-            correction.replacements[0].value;
-
-        newText =
-            newText.substring(0, start) +
-            replacement +
-            newText.substring(end);
-
-        lastStart = start;
+        const replacement = correction.replacements[0].value;
+        newText = newText.substring(0, start) + replacement + newText.substring(end);
+        nextAllowedEnd = start;
+        appliedAny = true;
     }
 
-    updateText(newText, true);
+    if (!appliedAny || newText === text) {
+        showToast("Nenhuma alteração pôde ser aplicada.");
+        return;
+    }
 
-    setStatus(
-        "Correções aplicadas. Reanalisando...",
-        "loading"
-    );
+    if (newText.length > MAX_TEXT_LENGTH) {
+        showToast("O texto corrigido ultrapassa o limite de 60.000 caracteres.");
+        return;
+    }
 
+    undoStack.push(text);
+    if (undoStack.length > MAX_UNDO) undoStack.shift();
+    redoStack = [];
+
+    text = newText;
+    editor.value = text;
+    localStorage.setItem(STORAGE_TEXT, text);
+    corrections = [];
+
+    updateStatistics();
+    renderCorrections();
+    renderPreview();
+    updateUndoButtons();
+
+    setStatus("Correções aplicadas. Reanalisando...", "loading");
     await analyzeText(false);
+    AdMobBridge.showInterstitial("corrigir_tudo");
 }
 
-
-/* =========================================================
-    PREVIEW
-========================================================= */
-
 function escapeHTML(value) {
-
     return value
         .replace(/&/g, "&amp;")
         .replace(/</g, "&lt;")
@@ -1566,100 +1435,48 @@ function escapeHTML(value) {
         .replace(/'/g, "&#039;");
 }
 
-
 function renderPreview() {
-
     if (!text) {
-
-        preview.innerHTML =
-            'Digite um texto e clique em "Analisar texto".';
-
+        preview.innerHTML = 'Digite um texto e clique em "Analisar texto".';
         return;
     }
 
     if (!corrections.length) {
-
         preview.textContent = text;
-
         return;
     }
 
-    const sorted =
-        [...corrections]
-            .filter(item =>
-                Number.isInteger(item.offset) &&
-                Number.isInteger(item.length)
-            )
-            .sort(
-                (a, b) =>
-                    a.offset - b.offset
-            );
+    const sorted = [...corrections]
+        .filter(item => Number.isInteger(item.offset) && Number.isInteger(item.length))
+        .sort((a, b) => a.offset - b.offset);
 
     let html = "";
     let position = 0;
 
     for (const correction of sorted) {
+        const start = correction.offset;
+        const end = start + correction.length;
+        if (start < position) continue;
 
-        const start =
-            correction.offset;
-
-        const end =
-            start +
-            correction.length;
-
-        if (start < position) {
-            continue;
-        }
-
-        html += escapeHTML(
-            text.substring(
-                position,
-                start
-            )
-        );
-
-        html += `
-            <span
-                class="highlight"
-                title="${escapeHTML(
-                    correction.message || ""
-                )}"
-            >
-                ${escapeHTML(
-                    text.substring(start, end)
-                )}
-            </span>
-        `;
-
+        html += escapeHTML(text.substring(position, start));
+        html += `<span class="highlight" title="${escapeHTML(correction.message || "")}">${escapeHTML(text.substring(start, end))}</span>`;
         position = end;
     }
 
-    html += escapeHTML(
-        text.substring(position)
-    );
-
+    html += escapeHTML(text.substring(position));
     preview.innerHTML = html;
 }
 
-
-/* =========================================================
-    DESFAZER / REFAZER
-========================================================= */
-
 function undo() {
-
     if (!undoStack.length) {
         showToast("Nada para desfazer.");
         return;
     }
-
     const previous = undoStack.pop();
     redoStack.push(text);
-
     text = previous;
     editor.value = text;
     corrections = [];
-
     updateStatistics();
     renderCorrections();
     renderPreview();
@@ -1668,30 +1485,21 @@ function undo() {
 }
 
 function redo() {
-
     if (!redoStack.length) {
         showToast("Nada para refazer.");
         return;
     }
-
     const next = redoStack.pop();
     undoStack.push(text);
-
     text = next;
     editor.value = text;
     corrections = [];
-
     updateStatistics();
     renderCorrections();
     renderPreview();
     setStatus("Alteração refeita");
     updateUndoButtons();
 }
-
-
-/* =========================================================
-    HISTÓRICO
-========================================================= */
 
 function loadHistory() {
     try {
@@ -1704,7 +1512,6 @@ function loadHistory() {
 
 function saveHistoryItem() {
     if (!text.trim()) return;
-
     if (history.length > 0 && history[0].text === text) return;
 
     history.unshift({
@@ -1712,9 +1519,7 @@ function saveHistoryItem() {
         date: new Date().toLocaleString("pt-BR")
     });
 
-    if (history.length > MAX_HISTORY) {
-        history.pop();
-    }
+    if (history.length > MAX_HISTORY) history.pop();
 
     try {
         localStorage.setItem(STORAGE_HISTORY, JSON.stringify(history));
@@ -1733,7 +1538,6 @@ function renderHistoryModal() {
     history.forEach((item, index) => {
         const div = document.createElement("div");
         div.className = "history-item";
-
         div.innerHTML = `
             <div style="font-size: 12px; color: var(--muted);">${item.date}</div>
             <div class="history-preview">${escapeHTML(item.text)}</div>
@@ -1763,11 +1567,6 @@ window.deleteHistory = function(index) {
     showToast("Item removido do histórico.");
 };
 
-
-/* =========================================================
-    EVENT LISTENERS & INICIALIZAÇÃO
-========================================================= */
-
 editor.addEventListener("input", (e) => {
     updateText(e.target.value, true);
     localStorage.setItem(STORAGE_TEXT, text);
@@ -1775,17 +1574,25 @@ editor.addEventListener("input", (e) => {
 
 analyzeBtn.addEventListener("click", () => analyzeText(true));
 applyAllBtn.addEventListener("click", applyAllCorrections);
-
 undoBtn.addEventListener("click", undo);
 redoBtn.addEventListener("click", redo);
 
-copyBtn.addEventListener("click", () => {
+copyBtn.addEventListener("click", async () => {
     if (!text) {
         showToast("Nada para copiar.");
         return;
     }
-    navigator.clipboard.writeText(text);
-    showToast("Texto copiado para a área de transferência!");
+    try {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            await navigator.clipboard.writeText(text);
+        } else {
+            editor.select();
+            document.execCommand("copy");
+        }
+        showToast("Texto copiado para a área de transferência!");
+    } catch (err) {
+        showToast("Não foi possível copiar automaticamente neste ambiente.");
+    }
 });
 
 downloadBtn.addEventListener("click", () => {
@@ -1801,6 +1608,7 @@ downloadBtn.addEventListener("click", () => {
     a.click();
     URL.revokeObjectURL(url);
     showToast("Download iniciado!");
+    AdMobBridge.showInterstitial("download_arquivo");
 });
 
 speakBtn.addEventListener("click", () => {
@@ -1882,7 +1690,6 @@ document.getElementById("launchAppBtn").addEventListener("click", function(e) {
     editor.focus();
 });
 
-// Ações dos botões da Capa Interativa
 document.getElementById("coverEditBtn").addEventListener("click", () => {
     editor.scrollIntoView({ behavior: "smooth" });
     editor.focus();
@@ -1906,7 +1713,6 @@ document.getElementById("coverDownloadBtn").addEventListener("click", () => {
     downloadBtn.click();
 });
 
-// Atalhos de teclado
 document.addEventListener("keydown", (e) => {
     if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'z') {
         e.preventDefault();
@@ -1917,7 +1723,6 @@ document.addEventListener("keydown", (e) => {
     }
 });
 
-// Inicialização de Preferências Salvas
 window.addEventListener("DOMContentLoaded", () => {
     try {
         const savedTheme = localStorage.getItem(STORAGE_THEME);
@@ -1941,6 +1746,7 @@ window.addEventListener("DOMContentLoaded", () => {
         }
     } catch (e) {}
     updateUndoButtons();
+    AdMobBridge.init();
 });
 </script>
 
